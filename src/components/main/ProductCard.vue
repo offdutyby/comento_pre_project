@@ -21,16 +21,17 @@
 
 <script>
 export default {
-  props:['propsdata'],
+  props:['propsdata','propsFunc'],
   methods: {
     goDetail() {
       this.$router.push({ name:'detail', params: {id:this.propsdata.id}})
     }
-  }
+  },
 }
 </script>
 
 <style scoped>
+/* Main Section */
 section {
   max-width: 865px;
   margin-bottom: 30px;
@@ -93,7 +94,6 @@ hr {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 .contents {
   max-width: 100%;
   font-family: SpoqaHanSans;
@@ -103,11 +103,4 @@ hr {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-@media screen and (max-width: 768px){
-section {
-  max-width: 768px;
-}
-}
-
 </style>

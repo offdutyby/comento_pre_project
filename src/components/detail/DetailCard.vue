@@ -14,7 +14,7 @@ export default {
 
 <style scoped>
 section {
-  width: 1140px;
+  max-width: 1140px;
   height: auto;
   padding: 30px;
   margin: 40px auto;
@@ -27,7 +27,7 @@ section {
 
 /* Title & Contents */
 .title {
-  max-width: 100%;
+  max-width: 1020px;
   margin-bottom: 10px;
   font-family: SpoqaHanSans;
   font-size: 18px;
@@ -42,7 +42,7 @@ section {
 }
 
 .contents {
-  max-width: 100%;
+  max-width: 1020px;
   font-family: SpoqaHanSans;
   font-size: 14px;
   color: #495057;
@@ -62,9 +62,11 @@ section {
   color: #adb5bd;
 }
 
+/* Media Query */
 @media screen and (max-width: 768px){
   section {
-    max-width: 768px;
+    max-width: 100%;
+    margin-top: 0;
   }
 }
 

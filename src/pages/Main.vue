@@ -28,13 +28,16 @@
             <button v-on:click="activeModal">필터</button>
           </div>
         </div>
-        <ProductCard v-bind:propsdata="cardItem" v-for="(cardItem, index) in this.feedListArr" :key="index"></ProductCard>
+        <div v-for="(cardItem, index) in this.feedListArr" :key="index">
+          <ProductCard v-bind:propsdata="cardItem" ></ProductCard>
+          <AdsCard v-bind:propsdata="feedAdsArr" v-if="(index+1)%3===0"></AdsCard>
+        </div>
       </article>
     </div>
       
       <modal modal v-if="showModal" @close="showModal = false">
         <h3 slot="header">필터</h3>
-        <span slot="body" >
+        <span slot="body">
           <div v-for="(categoryItem,index) in this.feedCategoryArr" :key="index">
             <input type="checkbox" checked="true" name="category_name">
             <span>{{categoryItem.name}}</span>
@@ -52,17 +55,20 @@
 <script>
 import Header from '../components/common/Header'
 import ProductCard from '../components/main/ProductCard'
+import AdsCard from '../components/main/AdsCard'
 import axios from 'axios'
 import Modal from '../components/common/Modal.vue'
 
 export default {
   data() {
     return {
+      firstIndex: 2,
       ascActive: true,
       descActive: false,
       showModal: false,
       feedListArr : [],
       feedCategoryArr : [],
+      feedAdsArr: [],
       page: 1,
       option: {
         params: {
@@ -71,18 +77,24 @@ export default {
           limit:10,
           category:[1,2,3]
         }},
+      adsOption: {
+        params: {
+          page: 1,
+          limit:3
+        }
+      },
       listApi: 'https://problem.comento.kr/api/list',
-      categoryApi: 'https://problem.comento.kr/api/category'
+      categoryApi: 'https://problem.comento.kr/api/category',
+      adsApi: 'https://problem.comento.kr/api/ads'
     }
   },
   created() {
     this.getListData();
     this.getCategoryData();
+    this.getAdsData();
   },
   updated () {
     this.scroll();
-  },
-  watch: {
   },
   methods: {
     getListData: function() {
@@ -98,6 +110,14 @@ export default {
         .then(
           res => {
             this.feedCategoryArr = [...res.data.category]
+          }
+        )
+    },
+     getAdsData: function() {
+      axios.get(this.adsApi,this.adsOption)
+        .then(
+          res => {
+            this.feedAdsArr = [...res.data.data]
           }
         )
     },
@@ -147,18 +167,19 @@ export default {
             }
           )
       },1000)
-    }
+    },
   },
   components:{
     'Header': Header,
     'ProductCard': ProductCard,
+    'AdsCard' : AdsCard,
     Modal: Modal
   }
 }
 </script>
 
 <style scoped>
-/* container */
+/* Main Section */
 .container {
   display: flex;
   max-width: 1200px;
@@ -173,7 +194,6 @@ a:link{
 }
 
 /* aside */
-
 aside {
   margin-right: 40px;
 }
@@ -191,7 +211,6 @@ aside button {
 }
 
 /* article */
-
 article {
   max-width: 100%;
 }
@@ -211,8 +230,6 @@ article {
   color: #adb5bd;
   background-color: white;
 }
-
-
 .asc.active, .desc.active {
   font-family: SpoqaHanSans;
   font-size: 13px;
@@ -221,8 +238,6 @@ article {
 .asc.active span, .desc.active span{
    color:#00c854
 }
-
-
 .filter button {
   width: 48px;
   height: 24px;
@@ -247,6 +262,10 @@ article {
 
 /* Media Query */
 @media screen and (max-width: 768px){
+  div {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
   .container {
     width: 100%;
     display: flex;
@@ -259,5 +278,4 @@ article {
     max-width: 100%;
   }
 }
-
 </style>
