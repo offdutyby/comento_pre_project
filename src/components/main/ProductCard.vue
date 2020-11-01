@@ -41,6 +41,7 @@ section {
   backdrop-filter: blur(30px);
   border: solid 1px #e1e4e7;
   background-color: #ffffff;
+  cursor: pointer;
 }
 
 /* Category Info */
