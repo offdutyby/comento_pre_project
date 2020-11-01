@@ -263,8 +263,7 @@ article {
 /* Media Query */
 @media screen and (max-width: 768px){
   div {
-    padding-left: 5px;
-    padding-right: 5px;
+    padding:0 5px;
   }
   .container {
     width: 100%;

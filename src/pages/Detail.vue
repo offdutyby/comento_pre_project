@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="header">
+    <span class="header">
       <Header></Header>
-    </div>
+    </span>
     <div class="mobileHeader">〈</div>
     <DetailCard v-bind:propsdata="detailDataObj"></DetailCard>
     <section>
@@ -76,7 +76,7 @@ div:last-child {
 /* Media Query */
 @media screen and (max-width: 768px){
   div {
-    padding-left: 5px;
+    padding: 0 5px;
   }
   .header {
     display: none;
