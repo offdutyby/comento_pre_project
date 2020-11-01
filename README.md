@@ -1,8 +1,8 @@
-# comento_project
+# 프로젝트 명
 
 > comento_pre_project
 
-## Build Setup
+## Build Setup / 실행 방법
 
 ``` bash
 # install dependencies
@@ -15,4 +15,4 @@ npm run dev
 npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### [Comento]201102_프론트엔드_현정호
